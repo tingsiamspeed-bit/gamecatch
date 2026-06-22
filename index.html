@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เกมจับแมลงด้วยการเคลื่อนไหวร่างกาย (Motion Bug Catcher)</title>
+    
+    <!-- นำเข้า Mediapipe สำหรับตรวจจับมือด้วยเว็บแคม -->
+    <script src="https://jsdelivr.net" crossorigin="anonymous"></script>
+    <script src="https://jsdelivr.net" crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+        }
+
+        body {
+            background-color: #1a1a24;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            margin-top: 15px;
+            font-size: 2rem;
+            background: linear-gradient(45deg, #4ade80, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* กล่องคะแนนและเวลา */
+        .info-panel {
+            display: flex;
+            gap: 30px;
+            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 30px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* จอเกมหลัก */
+        #game-container {
+            position: relative;
+            width: 800px;
+            height: 500px;
+            background: linear-gradient(to bottom, #1e3a1e, #0f1f0f);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            border: 4px solid #22c55e;
+        }
+
+        /* วิดีโอจากกล้อง (ซ่อนไว้เบื้องหลังแต่ใช้ประมวลผล) */
+        #webcam {
+            display: none;
+        }
+
+        /* ตัวชี้ตำแหน่งมือ (สวิงจับแมลง) */
+        #hand-cursor {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgba(239, 68, 68, 0.4);
+            border: 3px solid #ef4444;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10;
+            box-shadow: 0 0 15px #ef4444;
+            transition: width 0.1s, height 0.1s;
+        }
+
+        /* เอฟเฟกต์กำมือชก/จับ */
+        #hand-cursor.fist {
+            background: rgba(59, 130, 246, 0.6);
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px #3b82f6;
+            width: 40px;
+            height: 40px;
+        }
+
+        /* ตัวแมลง */
+        .bug {
+            position: absolute;
+            font-size: 40px;
+            cursor: pointer;
+            transform: translate(-50%, -50%);
+            transition: all 0.2s linear;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+        }
+
+        /* หน้าจอเริ่มและจบเกม */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+            border-radius: 16px;
+        }
+
+        .overlay.hidden {
+            display: none;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.6);
+        }
+
+        /* สถานะการโหลดกล้อง */
+        #loading {
+            font-size: 1.2rem;
+            color: #fbbf24;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bug Catcher Motion Game</h1>
+    
+    <div class="info-panel">
+        <div>คะแนน: <span id="score">0</span></div>
+        <div>เวลาที่เหลือ: <span id="time">30</span> วินาที</div>
+    </div>
+
+    <div id="game-container">
+        <!-- ตัวชี้ที่เคลื่อนไหวตามมือเรา -->
+        <div id="hand-cursor"></div>
+
+        <!-- หน้าจอเริ่มเกม -->
+        <div id="start-screen" class="overlay">
+            <div id="loading">กำลังเปิดใช้งานกล้องและระบบตรวจจับมือ...</div>
+            <p style="text-align: center; max-width: 500px; color: #cbd5e1; line-height: 1.6;">
+                วิธีเล่น: เปิดกล้องแล้วขยับมือของคุณผ่านหน้าจอเพื่อควบคุมวงกลมสีแดง <br>
+                <strong>"กำมือ"</strong> เพื่อตะครุบจับแมลงสีเขียว 🪲! หลีกเลี่ยงระเบิด 💣!
+            </p>
+            <button id="start-btn" class="btn" style="display:none;">เริ่มจับแมลง</button>
+        </div>
+
+        <!-- หน้าจอจบเกม -->
+        <div id="game-over-screen" class="overlay hidden">
+            <h2>จบเกมแล้ว! 🎉</h2>
+            <p style="font-size: 1.5rem; margin-top: 10px;">คุณจับแมลงได้ทั้งหมด: <span id="final-score">0</span> ตัว</p>
+            <button id="restart-btn" class="btn">เล่นอีกครั้ง</button>
+        </div>
+    </div>
+
+    <!-- แท็กวิดีโอซ่อนไว้สำหรับอ่านค่าจากเว็บแคม -->
+    <video id="webcam" autoplay playsinline></video>
+
+    <script>
+        const videoElement = document.getElementById('webcam');
+        const gameContainer = document.getElementById('game-container');
+        const handCursor = document.getElementById('hand-cursor');
+        const scoreDisplay = document.getElementById('score');
+        const timeDisplay = document.getElementById('time');
+        
+        const startScreen = document.getElementById('start-screen');
+        const gameOverScreen = document.getElementById('game-over-screen');
+        const loadingText = document.getElementById('loading');
+        const startBtn = document.getElementById('start-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const finalScoreDisplay = document.getElementById('final-score');
+
+        let score = 0;
+        let timeLeft = 30;
+        let gameInterval;
+        let bugInterval;
+        let isPlaying = false;
+        
+        // ขนาดพิกเซลกระดานเกม
+        const containerWidth = 800;
+        const containerHeight = 500;
+
+        // รายการวัตถุที่จะสุ่มเกิด
+        const bugTypes = [
+            { emoji: '🪲', type: 'bug', points: 1 },
+            { emoji: '🪰', type: 'bug', points: 1 },
+            { emoji: '🦋', type: 'bug', points: 2 },
+            { emoji: '💣', type: 'bomb', points: -3 }
+        ];
+
+        // --- ระบบตรวจจับการเคลื่อนไหว (MediaPipe Hands) ---
+        const hands = new Hands({
+            locateFile: (file) => `https://jsdelivr.net{file}`
+        });
+
+        hands.setOptions({
+            maxNumHands: 1,
+            modelComplexity: 1,
+            minDetectionConfidence: 0.6,
+            minTrackingConfidence: 0.6
+        });
+
+        hands.onResults(onHandResults);
+
+        const camera = new Camera(videoElement, {
+            onFrame: async () => {
+                await hands.send({ image: videoElement });
+            },
+            width: 640,
+            height: 480
+        });
+
+        // เริ่มเปิดกล้องตั้งแต่โหลดหน้าเว็บ
+        camera.start().then(() => {
+            loadingText.style.display = 'none';
+            startBtn.style.display = 'inline-block';
+        }).catch(err => {
+            loadingText.textContent = "ไม่สามารถเข้าถึงกล้องได้ กรุณาอนุญาตให้ระบบเข้าถึงกล้องถ่ายภาพ";
+            console.error(err);
+        });
+
+        // ฟังก์ชันรับพิกัดมือและประมวลผลท่าทาง
+        function onHandResults(results) {
+            if (!results.multiHandLandmarks || results.multiHandLandmarks.length === 0) return;
+
+            const landmarks = results.multiHandLandmarks[0];
+            
+            // ใช้พิกัดของข้อมือหรือโคนนิ้วกลางเป็นตัวชี้ตำแหน่ง (จุดที่ 9 ยอดนิยมและเสถียรสุด)
+            const handPoint = landmarks[9];
+            
+            // แปลงพิกัดสัดส่วน (0 ถึง 1) เป็นพิกัดพิกเซลบนหน้าจอเกม (กลับด้านซ้ายขวาเพื่อให้เหมือนกระจกเงา)
+            const x = (1 - handPoint.x) * containerWidth;
+            const y = handPoint.y * containerHeight;
+
+            // ขยับตัวชี้จับแมลงตามมือ
+            handCursor.style.left = `${x}px`;
+            handCursor.style.top = `${y}px`;
+
+            // เช็คการ "กำมือ" (เปรียบเทียบระยะปลายนิ้วกับข้อนิ้วล่าง)
+            // ถ้านิ้วชี้ นิ้วกลาง นิ้วนาง งอลงมาต่ำกว่าโคนนิ้ว แปลว่ากำลังกำมือ
+            const isFist = landmarks[8].y > landmarks[6].y && 
+                           landmarks[12].y > landmarks[10].y && 
+                           landmarks[16].y > landmarks[14].y;
+
+            if (isFist) {
+                handCursor.classList.add('fist');
+                if (isPlaying) {
+                    checkCollision(x, y);
+                }
+            } else {
+                handCursor.classList.remove('fist');
+            }
+        }
+
+        // --- ระบบกลไกเกม ---
+        function startGame() {
+            score = 0;
+            timeLeft = 30;
+            scoreDisplay.textContent = score;
+            timeDisplay.textContent = timeLeft;
+            isPlaying = true;
+
+            startScreen.classList.add('hidden');
+            gameOverScreen.classList.add('hidden');
+
+            // ลบแมลงเก่าๆ ที่ค้างอยู่ (ถ้ามี)
+            document.querySelectorAll('.bug').forEach(b => b.remove());
+
+            // เริ่มนับเวลาถอยหลัง
