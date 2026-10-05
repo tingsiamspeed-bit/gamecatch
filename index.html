@@ -3,9 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>แบบทดสอบการป้องกันการทุจริต ป.6</title>
+
+<title>
+แบบทดสอบการป้องกันการทุจริต ป.6
+</title>
 
 <style>
+
 :root{
   --green:#2f6b3f;
   --green2:#4f8a55;
@@ -23,10 +27,25 @@ body{
   margin:0;
   font-family:"Tahoma","Noto Sans Thai",sans-serif;
   color:#263b2a;
+
   background:
-    radial-gradient(circle at 10% 10%,#d9efcf 0 8%,transparent 9%),
-    radial-gradient(circle at 90% 20%,#e4f3d9 0 10%,transparent 11%),
-    linear-gradient(135deg,#eaf5df,#fdf9e9 55%,#dcefd5);
+  radial-gradient(
+    circle at 10% 10%,
+    #d9efcf 0 8%,
+    transparent 9%
+  ),
+  radial-gradient(
+    circle at 90% 20%,
+    #e4f3d9 0 10%,
+    transparent 11%
+  ),
+  linear-gradient(
+    135deg,
+    #eaf5df,
+    #fdf9e9 55%,
+    #dcefd5
+  );
+
   min-height:100vh;
 }
 
@@ -38,258 +57,565 @@ body{
 
 .card{
   background:rgba(255,255,255,.94);
+
   border:2px solid #b8d3ad;
+
   border-radius:24px;
-  box-shadow:0 12px 35px rgba(45,82,48,.14);
+
+  box-shadow:
+  0 12px 35px rgba(45,82,48,.14);
+
   overflow:hidden;
 }
 
-/* ส่วนหัว */
+
+/* =========================
+   HEADER
+========================= */
+
 .header{
+
   padding:32px 24px;
+
   text-align:center;
+
   color:white;
+
   background:
-    linear-gradient(135deg,#245b36,#4f8a55 55%,#7cae62);
+  linear-gradient(
+    135deg,
+    #245b36,
+    #4f8a55 55%,
+    #7cae62
+  );
+
   position:relative;
 }
 
 .header:before{
-  content:"🍃  🌿  🍀  🌱  🍃";
+
+  content:
+  "🍃  🌿  🍀  🌱  🍃";
+
   display:block;
+
   font-size:28px;
+
   letter-spacing:8px;
+
   margin-bottom:8px;
 }
 
 h1{
+
   margin:0;
-  font-size:clamp(25px,5vw,40px);
+
+  font-size:
+  clamp(25px,5vw,40px);
 }
 
 .subtitle{
+
   margin:9px 0 0;
+
   font-size:17px;
 }
 
-/* หน้าเริ่มต้น */
+
+/* =========================
+   START SCREEN
+========================= */
+
 .info{
+
   padding:22px;
+
   background:#f7f9ed;
-  border-bottom:1px solid #d5e4c9;
+
+  border-bottom:
+  1px solid #d5e4c9;
 }
 
 input[type=text]{
+
   padding:12px 14px;
-  border:1px solid #aac69f;
+
+  border:
+  1px solid #aac69f;
+
   border-radius:12px;
+
   font-size:16px;
+
   width:100%;
+
   max-width:420px;
 }
 
-/* Progress */
+
+/* =========================
+   PROGRESS
+========================= */
+
 .progress-wrap{
-  padding:18px 24px 0;
+
+  padding:
+  18px 24px 0;
 }
 
 .progress{
+
   height:12px;
+
   background:#e2eadb;
+
   border-radius:20px;
+
   overflow:hidden;
 }
 
 .bar{
+
   height:100%;
+
   width:0;
-  background:linear-gradient(
+
+  background:
+  linear-gradient(
     90deg,
     #3e7c47,
     #a0bf62
   );
+
   transition:.3s;
 }
 
-/* คำถาม */
+
+/* =========================
+   QUESTION
+========================= */
+
 .question{
+
   padding:24px;
 }
 
 .badge{
+
   display:inline-block;
+
   background:#e4f1df;
+
   color:#2f6b3f;
+
   padding:7px 13px;
+
   border-radius:20px;
+
   font-weight:bold;
 }
 
 .qtext{
+
   font-size:20px;
+
   font-weight:bold;
+
   line-height:1.65;
+
   margin:15px 0;
 }
 
-/* ตัวเลือก */
+
+/* =========================
+   OPTIONS
+========================= */
+
 .option{
+
   display:block;
+
   padding:15px 17px;
+
   margin:11px 0;
-  border:2px solid #d2e2ca;
+
+  border:
+  2px solid #d2e2ca;
+
   border-radius:15px;
+
   background:#fff;
+
   cursor:pointer;
+
   transition:.2s;
 }
 
 .option:hover{
+
   border-color:#6e9f67;
+
   background:#f4faef;
 }
 
 .option input{
+
   margin-right:10px;
+
   transform:scale(1.2);
 }
 
-/* ปุ่ม */
+
+/* =========================
+   BUTTONS
+========================= */
+
 .actions{
+
   display:flex;
+
   gap:12px;
-  justify-content:space-between;
-  padding:0 24px 25px;
+
+  justify-content:
+  space-between;
+
+  padding:
+  0 24px 25px;
 }
 
 button{
+
   border:0;
+
   border-radius:14px;
-  padding:13px 22px;
+
+  padding:
+  13px 22px;
+
   font-size:16px;
+
   font-weight:bold;
+
   cursor:pointer;
+
   background:#397447;
+
   color:white;
-  box-shadow:0 5px 12px rgba(50,100,60,.18);
+
+  box-shadow:
+  0 5px 12px
+  rgba(50,100,60,.18);
 }
 
 button.secondary{
+
   background:#dfeadb;
+
   color:#315c37;
 }
 
 button.gold{
+
   background:#c99535;
 }
 
 button:disabled{
+
   opacity:.45;
+
   cursor:not-allowed;
 }
 
-/* หน้าผลคะแนน */
+
+/* =========================
+   RESULT
+========================= */
+
 .result{
+
   display:none;
+
   padding:35px 25px;
+
   text-align:center;
 }
 
 .score{
+
   font-size:56px;
+
   font-weight:bold;
+
   color:#2f6b3f;
 }
 
 .review{
+
   text-align:left;
+
   margin-top:22px;
 }
 
 .review-item{
+
   padding:15px;
+
   margin:10px 0;
+
   border-radius:14px;
 }
 
 .correct{
+
   background:#e9f6e6;
-  border-left:6px solid #4f9b50;
+
+  border-left:
+  6px solid #4f9b50;
 }
 
 .wrong{
+
   background:#fff0eb;
-  border-left:6px solid #c96a50;
+
+  border-left:
+  6px solid #c96a50;
 }
 
+
+/* =========================
+   FOOTER
+========================= */
+
 .footer{
+
   text-align:center;
+
   color:#58705a;
+
   font-size:13px;
+
   padding:20px;
 }
 
-.hidden{
+.creator{
+
+  margin-top:12px;
+
+  padding-top:10px;
+
+  border-top:
+  1px solid #c9dbc1;
+
+  color:#3f6546;
+
+  font-weight:bold;
+
+  line-height:1.7;
+}
+
+
+/* =========================
+   PRINT BUTTON
+========================= */
+
+.print-summary{
+
+  margin-top:16px;
+
+  background:#397447;
+}
+
+
+/* =========================
+   PRINT
+========================= */
+
+.print-title{
+
   display:none;
 }
 
-/* มือถือ */
+
+/* =========================
+   HIDDEN
+========================= */
+
+.hidden{
+
+  display:none;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:600px){
 
   .container{
+
     padding:10px;
   }
 
   .question{
+
     padding:18px;
   }
 
   .actions{
-    padding:0 18px 20px;
+
+    padding:
+    0 18px 20px;
   }
 
   .qtext{
+
     font-size:18px;
   }
 
 }
+
+
+/* =========================
+   PRINT STYLE
+========================= */
+
+@media print{
+
+  body{
+
+    background:white;
+  }
+
+  .container{
+
+    max-width:none;
+
+    padding:0;
+  }
+
+  .card{
+
+    border:0;
+
+    box-shadow:none;
+  }
+
+  .header{
+
+    -webkit-print-color-adjust:
+    exact;
+
+    print-color-adjust:
+    exact;
+  }
+
+
+  #startScreen,
+  #quizScreen,
+  .footer,
+  #printBtn,
+  #restartBtn{
+
+    display:none !important;
+  }
+
+
+  #resultScreen{
+
+    display:block !important;
+
+    padding:20px;
+  }
+
+
+  .review-item{
+
+    break-inside:avoid;
+  }
+
+
+  .print-title{
+
+    display:block !important;
+  }
+
+}
+
+
+/* =========================
+   QUESTIONS
+========================= */
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
+
 
 <div class="card">
 
-<!-- HEADER -->
+
+<!-- =====================
+     HEADER
+===================== -->
+
 <div class="header">
 
-<h1>🌿 การป้องกันการทุจริต</h1>
+<h1>
+🌿 การป้องกันการทุจริต
+</h1>
 
 <div class="subtitle">
-แบบทดสอบ ชั้นประถมศึกษาปีที่ 6
-• 20 ข้อ • 20 คะแนน
-</div>
+
+แบบทดสอบ
+ชั้นประถมศึกษาปีที่ 6
+•
+20 ข้อ
+•
+20 คะแนน
 
 </div>
 
+</div>
 
-<!-- START SCREEN -->
-<div id="startScreen" class="info">
 
-<h2>🌱 ยินดีต้อนรับสู่แบบทดสอบ</h2>
+<!-- =====================
+     START SCREEN
+===================== -->
+
+<div
+id="startScreen"
+class="info">
+
+<h2>
+🌱 ยินดีต้อนรับสู่แบบทดสอบ
+</h2>
 
 <p>
-เลือกคำตอบที่ถูกต้องที่สุดเพียง 1 ข้อ
+
+เลือกคำตอบที่ถูกต้องที่สุด
+เพียง 1 ข้อ
 แล้วกด “ข้อต่อไป”
+
 </p>
 
+
 <label>
-<b>ชื่อ-สกุล</b>
+
+<b>
+ชื่อ-สกุล
+</b>
+
 </label>
 
 <br><br>
+
 
 <input
 id="studentName"
@@ -297,13 +623,20 @@ type="text"
 placeholder="พิมพ์ชื่อ-สกุล"
 >
 
+
 <br><br>
 
+
 <label>
-<b>ชั้น / ห้อง</b>
+
+<b>
+ชั้น / ห้อง
+</b>
+
 </label>
 
 <br><br>
+
 
 <input
 id="studentClass"
@@ -311,30 +644,50 @@ type="text"
 placeholder="เช่น ป.6/1"
 >
 
+
 <br><br>
 
-<button onclick="startQuiz()">
+
+<button
+onclick="startQuiz()">
+
 เริ่มทำแบบทดสอบ 🌳
+
 </button>
 
 </div>
 
 
-<!-- QUIZ SCREEN -->
-<div id="quizScreen" class="hidden">
+<!-- =====================
+     QUIZ
+===================== -->
 
-<div class="progress-wrap">
+<div
+id="quizScreen"
+class="hidden">
 
-<div id="progressText"></div>
+
+<div
+class="progress-wrap">
+
+
+<div
+id="progressText">
+</div>
+
 
 <br>
 
-<div class="progress">
+
+<div
+class="progress">
+
 
 <div
 id="bar"
 class="bar">
 </div>
+
 
 </div>
 
@@ -347,7 +700,9 @@ class="question">
 </div>
 
 
-<div class="actions">
+<div
+class="actions">
+
 
 <button
 id="prevBtn"
@@ -367,39 +722,88 @@ onclick="nextQuestion()">
 
 </button>
 
-</div>
 
 </div>
 
+</div>
 
-<!-- RESULT SCREEN -->
+
+<!-- =====================
+     RESULT
+===================== -->
+
 <div
 id="resultScreen"
 class="result">
 
-<div style="font-size:50px">
-🌳🌿🍃
+
+<div
+class="print-title">
+
+<h1>
+สรุปผลการสอบ
+</h1>
+
+<p>
+วิชาการป้องกันการทุจริต
+ชั้นประถมศึกษาปีที่ 6
+</p>
+
 </div>
 
+
+<div
+style="font-size:50px">
+
+🌳🌿🍃
+
+</div>
+
+
 <h2>
+
 ทำแบบทดสอบเสร็จแล้ว
+
 </h2>
 
-<p id="studentResult"></p>
+
+<p
+id="studentResult">
+</p>
+
 
 <div
 class="score"
 id="score">
 </div>
 
-<p id="message"></p>
+
+<p
+id="message">
+</p>
+
 
 <div
 class="review"
 id="review">
 </div>
 
+
 <button
+id="printBtn"
+class="print-summary"
+onclick="printSummary()">
+
+🖨️ พิมพ์สรุปผลการสอบ
+
+</button>
+
+
+<br><br>
+
+
+<button
+id="restartBtn"
 class="gold"
 onclick="location.reload()">
 
@@ -407,26 +811,54 @@ onclick="location.reload()">
 
 </button>
 
-</div>
 
 </div>
 
 
-<div class="footer">
+</div>
+
+
+<!-- =====================
+     FOOTER
+===================== -->
+
+<div
+class="footer">
+
 
 🌱 เรียนรู้ความซื่อสัตย์
-• รู้เท่าทันการทุจริต
-• ร่วมสร้างสังคมโปร่งใส 🌱
+•
+รู้เท่าทันการทุจริต
+•
+ร่วมสร้างสังคมโปร่งใส 🌱
+
+
+<div
+class="creator">
+
+ผู้จัดทำ:
+ครูปรเมศวร์ ฟองลม
+
+<br>
+
+โรงเรียนบ้านชาด
+อำเภอศรีเมืองใหม่
+สพป.อบ.3
 
 </div>
+
+
+</div>
+
 
 </div>
 
 
 <script>
 
+
 /* =========================
-   ข้อสอบ 20 ข้อ
+   QUESTIONS
 ========================= */
 
 const questions = [
@@ -436,8 +868,11 @@ const questions = [
 
 [
 "การทำงานผิดพลาดโดยไม่ได้ตั้งใจ",
+
 "การใช้ความรู้เพื่อช่วยเหลือผู้อื่น",
+
 "การแสวงหาประโยชน์โดยมิชอบให้แก่ตนเองหรือผู้อื่น",
+
 "การปฏิบัติตามกฎของโรงเรียน"
 ],
 
@@ -450,8 +885,11 @@ const questions = [
 
 [
 "ไม่สนใจ เพราะไม่ใช่เรื่องของตน",
+
 "ช่วยเพื่อนปกปิดเรื่องดังกล่าว",
+
 "นำเรื่องไปพูดต่อในสื่อสังคมออนไลน์",
+
 "แจ้งครูหรือผู้รับผิดชอบด้วยข้อมูลตามความจริง"
 ],
 
@@ -464,8 +902,11 @@ const questions = [
 
 [
 "ช่วยกันรักษาความสะอาดห้องเรียน",
+
 "ใช้เงินส่วนรวมซื้อของที่ตนเองต้องการ",
+
 "แบ่งอุปกรณ์การเรียนให้เพื่อน",
+
 "ช่วยดูแลทรัพย์สินของโรงเรียน"
 ],
 
@@ -478,8 +919,11 @@ const questions = [
 
 [
 "ความสามัคคี",
+
 "การมีน้ำใจ",
+
 "การขัดกันระหว่างผลประโยชน์ส่วนตนและส่วนรวม",
+
 "การประหยัดทรัพยากร"
 ],
 
@@ -492,8 +936,11 @@ const questions = [
 
 [
 "เก็บเงินไว้เพราะร้านค้าทอนผิดเอง",
+
 "แบ่งเงินให้เพื่อน",
+
 "นำเงินไปซื้อของให้ตนเอง",
+
 "แจ้งผู้ขายและคืนเงินส่วนที่เกิน"
 ],
 
@@ -506,8 +953,11 @@ const questions = [
 
 [
 "เห็นการโกงแล้วทำเป็นไม่รู้ไม่เห็น",
+
 "เตือนเพื่อนเมื่อพบพฤติกรรมที่ไม่ถูกต้อง และแจ้งผู้ใหญ่เมื่อจำเป็น",
+
 "ช่วยเพื่อนปกปิดความผิดเพื่อรักษามิตรภาพ",
+
 "แชร์เรื่องที่ยังไม่ตรวจสอบเพื่อให้คนอื่นรู้"
 ],
 
@@ -520,8 +970,11 @@ const questions = [
 
 [
 "กดลิงก์ทันที",
+
 "ส่งข้อมูลให้เพื่อนช่วยตรวจสอบ",
+
 "ตรวจสอบแหล่งที่มาและไม่เปิดเผยข้อมูลสำคัญโดยไม่จำเป็น",
+
 "ส่งต่อข้อความให้ทุกคนในห้อง"
 ],
 
@@ -534,8 +987,11 @@ const questions = [
 
 [
 "เชื่อทันทีหากมีคนแชร์จำนวนมาก",
+
 "ตรวจสอบแหล่งที่มาและข้อมูลจากแหล่งที่น่าเชื่อถือก่อนเชื่อหรือส่งต่อ",
+
 "ส่งต่อให้เพื่อนเพื่อถามว่าเป็นเรื่องจริงหรือไม่",
+
 "เชื่อว่าภาพและเสียงทุกอย่างในอินเทอร์เน็ตเป็นของจริง"
 ],
 
@@ -548,8 +1004,11 @@ const questions = [
 
 [
 "นำคอมพิวเตอร์โรงเรียนกลับไปใช้ที่บ้านโดยไม่ขออนุญาต",
+
 "ใช้เครื่องพิมพ์ของโรงเรียนพิมพ์งานส่วนตัวจำนวนมาก",
+
 "ใช้อุปกรณ์ตามวัตถุประสงค์และดูแลรักษาให้อยู่ในสภาพดี",
+
 "ยืมอุปกรณ์ของโรงเรียนให้บุคคลภายนอกโดยไม่แจ้งครู"
 ],
 
@@ -562,8 +1021,11 @@ const questions = [
 
 [
 "ลงชื่อแทนเพราะเป็นเพื่อนกัน",
+
 "ลงชื่อแทนถ้าไม่มีใครเห็น",
+
 "ปฏิเสธและอธิบายว่าการลงชื่อแทนเป็นการกระทำที่ไม่ถูกต้อง",
+
 "ให้เพื่อนคนอื่นลงชื่อแทน"
 ],
 
@@ -576,8 +1038,11 @@ const questions = [
 
 [
 "เก็บของส่วนกลางไว้ใช้คนเดียว",
+
 "ใช้น้ำและไฟของโรงเรียนอย่างประหยัด",
+
 "นำอุปกรณ์ของห้องเรียนไปใช้ส่วนตัว",
+
 "เลือกทำเฉพาะสิ่งที่ตนเองได้รับประโยชน์"
 ],
 
@@ -590,8 +1055,11 @@ const questions = [
 
 [
 "รับของแล้วลงคะแนนให้",
+
 "รับของแต่ไม่ลงคะแนนให้",
+
 "แจ้งครูหรือคณะกรรมการเลือกตั้งตามข้อเท็จจริง",
+
 "ชวนเพื่อนให้รับของด้วย"
 ],
 
@@ -604,8 +1072,11 @@ const questions = [
 
 [
 "เห็นเพื่อนโกงข้อสอบแล้วช่วยบังไม่ให้ครูเห็น",
+
 "ไม่ลอกข้อสอบและเตือนเพื่อนให้ทำข้อสอบด้วยตนเอง",
+
 "ส่งคำตอบให้เพื่อนเพราะสงสาร",
+
 "ลอกคำตอบจากเพื่อนเพราะทุกคนทำกัน"
 ],
 
@@ -618,8 +1089,11 @@ const questions = [
 
 [
 "แชร์ทันทีเพื่อให้คนอื่นรับรู้",
+
 "ตรวจสอบข้อมูลและแหล่งที่มาก่อนเชื่อหรือเผยแพร่",
+
 "เพิ่มข้อความกล่าวหาให้รุนแรงขึ้น",
+
 "ส่งต่อในกลุ่มห้องเรียนโดยไม่ตรวจสอบ"
 ],
 
@@ -632,8 +1106,11 @@ const questions = [
 
 [
 "ปิดบังข้อมูลการใช้เงินของส่วนรวม",
+
 "เปิดเผยข้อมูลที่ควรเปิดเผยและสามารถตรวจสอบได้",
+
 "ให้เฉพาะเพื่อนสนิททราบข้อมูล",
+
 "เปลี่ยนข้อมูลเพื่อให้ตนเองดูดี"
 ],
 
@@ -646,8 +1123,11 @@ const questions = [
 
 [
 "แบ่งเงินที่เหลือกันเอง",
+
 "นำเงินไปซื้อของส่วนตัว",
+
 "รายงานยอดเงินและดำเนินการตามระเบียบหรือข้อตกลงของห้องเรียน",
+
 "เก็บเงินไว้โดยไม่แจ้งใคร"
 ],
 
@@ -660,8 +1140,11 @@ const questions = [
 
 [
 "เชื่อข้อความที่เร่งให้รีบโอนเงิน",
+
 "เปิดเผยรหัสผ่านเพื่อยืนยันตัวตน",
+
 "ไม่รีบเชื่อ ตรวจสอบข้อมูล และไม่โอนเงินเพียงเพราะถูกเร่งรัด",
+
 "กดลิงก์จากข้อความที่ไม่รู้จักเพื่อดูรายละเอียด"
 ],
 
@@ -674,8 +1157,11 @@ const questions = [
 
 [
 "เก็บเงินไว้แล้วทิ้งกระเป๋า",
+
 "แบ่งเงินกับเพื่อน",
+
 "นำส่งครูหรือฝ่ายที่รับผิดชอบเพื่อตามหาเจ้าของ",
+
 "เก็บไว้ก่อนแล้วค่อยตัดสินใจภายหลัง"
 ],
 
@@ -688,8 +1174,11 @@ const questions = [
 
 [
 "ทำให้เราได้รับสิ่งของมากขึ้น",
+
 "ทำให้คำนึงถึงประโยชน์ของส่วนรวมและไม่เอาเปรียบผู้อื่น",
+
 "ทำให้สามารถทำสิ่งใดก็ได้โดยไม่ต้องมีกฎ",
+
 "ทำให้ได้รับสิทธิพิเศษจากโรงเรียน"
 ],
 
@@ -702,8 +1191,11 @@ const questions = [
 
 [
 "ปฏิบัติตามกฎ มีความซื่อสัตย์ ใช้ทรัพย์สินส่วนรวมอย่างรับผิดชอบ และกล้าแจ้งเมื่อพบสิ่งผิดปกติ",
+
 "สนใจเฉพาะเรื่องที่เกี่ยวข้องกับตนเอง",
+
 "ปล่อยให้ครูเป็นผู้แก้ปัญหาเพียงฝ่ายเดียว",
+
 "ไม่พูดถึงการทุจริตเพราะกลัวเกิดปัญหา"
 ],
 
@@ -714,7 +1206,7 @@ const questions = [
 
 
 /* =========================
-   ตัวแปร
+   VARIABLES
 ========================= */
 
 let current = 0;
@@ -724,7 +1216,7 @@ Array(questions.length).fill(null);
 
 
 /* =========================
-   เริ่มทำข้อสอบ
+   START
 ========================= */
 
 function startQuiz(){
@@ -733,9 +1225,11 @@ function startQuiz(){
   .getElementById("startScreen")
   .classList.add("hidden");
 
+
   document
   .getElementById("quizScreen")
   .classList.remove("hidden");
+
 
   render();
 
@@ -743,12 +1237,14 @@ function startQuiz(){
 
 
 /* =========================
-   แสดงคำถาม
+   RENDER QUESTION
 ========================= */
 
 function render(){
 
-  const q = questions[current];
+  const q =
+  questions[current];
+
 
   document
   .getElementById("progressText")
@@ -760,38 +1256,54 @@ function render(){
   .getElementById("bar")
   .style.width =
   ((current + 1) /
-  questions.length * 100) + "%";
+  questions.length * 100)
+  + "%";
 
 
   let html = `
 
   <span class="badge">
-  🌿 คำถามที่ ${current + 1}
+
+  🌿 คำถามที่
+  ${current + 1}
+
   </span>
 
+
   <div class="qtext">
+
   ${q[0]}
+
   </div>
 
   `;
 
 
-  q[1].forEach((op,i)=>{
+  q[1].forEach(
+  (op,i)=>{
 
     html += `
 
-    <label class="option">
+    <label
+    class="option">
 
     <input
+
     type="radio"
+
     name="answer"
+
     value="${i}"
 
-    ${answers[current] === i
-    ? "checked"
-    : ""}
+    ${
+      answers[current] === i
+      ? "checked"
+      : ""
+    }
 
-    onchange="answers[current]=${i}">
+    onchange="
+    answers[current]=${i}
+    ">
 
     ${String.fromCharCode(65+i)}.
     ${op}
@@ -805,48 +1317,60 @@ function render(){
 
   document
   .getElementById("questionBox")
-  .innerHTML = html;
+  .innerHTML =
+  html;
 
 
   document
   .getElementById("prevBtn")
-  .disabled = current === 0;
+  .disabled =
+  current === 0;
 
 
   document
   .getElementById("nextBtn")
   .textContent =
-  current === questions.length - 1
+
+  current ===
+  questions.length - 1
+
   ? "ส่งคำตอบ ✓"
+
   : "ข้อต่อไป →";
 
 }
 
 
 /* =========================
-   ข้อต่อไป
+   NEXT
 ========================= */
 
 function nextQuestion(){
 
-  if(answers[current] === null){
+  if(
+    answers[current] === null
+  ){
 
     alert(
       "กรุณาเลือกคำตอบก่อนดำเนินการต่อ"
     );
 
     return;
-
   }
 
 
-  if(current < questions.length - 1){
+  if(
+    current <
+    questions.length - 1
+  ){
 
     current++;
 
     render();
 
-  }else{
+  }
+
+  else{
 
     finish();
 
@@ -856,7 +1380,7 @@ function nextQuestion(){
 
 
 /* =========================
-   ย้อนกลับ
+   PREVIOUS
 ========================= */
 
 function prevQuestion(){
@@ -873,7 +1397,7 @@ function prevQuestion(){
 
 
 /* =========================
-   ตรวจคำตอบ
+   FINISH
 ========================= */
 
 function finish(){
@@ -881,9 +1405,12 @@ function finish(){
   let score = 0;
 
 
-  questions.forEach((q,i)=>{
+  questions.forEach(
+  (q,i)=>{
 
-    if(answers[i] === q[2]){
+    if(
+      answers[i] === q[2]
+    ){
 
       score++;
 
@@ -899,30 +1426,39 @@ function finish(){
 
   document
   .getElementById("resultScreen")
-  .style.display = "block";
+  .style.display =
+  "block";
 
 
   const name =
+
   document
   .getElementById("studentName")
-  .value || "นักเรียน";
+  .value ||
+
+  "นักเรียน";
 
 
   const cls =
+
   document
   .getElementById("studentClass")
-  .value || "-";
+  .value ||
+
+  "-";
 
 
   document
   .getElementById("studentResult")
   .textContent =
+
   `${name} • ${cls}`;
 
 
   document
   .getElementById("score")
   .textContent =
+
   `${score} / ${questions.length} คะแนน`;
 
 
@@ -932,6 +1468,7 @@ function finish(){
   if(score >= 18){
 
     message =
+
     "🌟 ยอดเยี่ยมมาก! มีความเข้าใจเรื่องความซื่อสัตย์และการป้องกันการทุจริตดีมาก";
 
   }
@@ -939,6 +1476,7 @@ function finish(){
   else if(score >= 14){
 
     message =
+
     "🌱 ทำได้ดี! ลองทบทวนข้อที่ผิดเพื่อพัฒนาความรู้ให้ดียิ่งขึ้น";
 
   }
@@ -946,6 +1484,7 @@ function finish(){
   else{
 
     message =
+
     "🍃 ควรทบทวนเรื่องความซื่อสัตย์ ผลประโยชน์ส่วนตนและส่วนรวม และการรู้เท่าทันสื่อเพิ่มเติม";
 
   }
@@ -953,15 +1492,19 @@ function finish(){
 
   document
   .getElementById("message")
-  .textContent = message;
+  .textContent =
+  message;
 
 
-  /* แสดงเฉลย */
+  /* =====================
+     REVIEW
+  ===================== */
 
   let review = "";
 
 
-  questions.forEach((q,i)=>{
+  questions.forEach(
+  (q,i)=>{
 
     const ok =
     answers[i] === q[2];
@@ -969,18 +1512,26 @@ function finish(){
 
     review += `
 
-    <div class="review-item
+    <div
+    class="review-item
     ${ok ? "correct" : "wrong"}">
 
     <b>
+
     ข้อ ${i+1}:
+
     ${ok ? "✓ ถูก" : "✗ ผิด"}
+
     </b>
 
     <br>
 
     คำตอบที่ถูก:
-    ${String.fromCharCode(65 + q[2])}.
+
+    ${String.fromCharCode(
+      65 + q[2]
+    )}.
+
     ${q[1][q[2]]}
 
     </div>
@@ -992,11 +1543,25 @@ function finish(){
 
   document
   .getElementById("review")
-  .innerHTML = review;
+  .innerHTML =
+  review;
+
+}
+
+
+/* =========================
+   PRINT SUMMARY
+========================= */
+
+function printSummary(){
+
+  window.print();
 
 }
 
 </script>
 
+
 </body>
+
 </html>
