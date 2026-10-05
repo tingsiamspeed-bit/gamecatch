@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>เกมนักสำรวจ Flowchart</title>
+<title>แบบทดสอบการป้องกันการทุจริต ป.6</title>
 
 <style>
 :root{
-  --green:#2f6846;
-  --cream:#fffaf0;
-  --text:#243b2d;
-  --line:#b8cda9;
+  --green:#2f6b3f;
+  --green2:#4f8a55;
+  --light:#eef7e9;
+  --cream:#fffdf4;
+  --brown:#76583e;
+  --gold:#d6a84f;
 }
 
 *{
@@ -19,1328 +21,980 @@
 
 body{
   margin:0;
+  font-family:"Tahoma","Noto Sans Thai",sans-serif;
+  color:#263b2a;
+  background:
+    radial-gradient(circle at 10% 10%,#d9efcf 0 8%,transparent 9%),
+    radial-gradient(circle at 90% 20%,#e4f3d9 0 10%,transparent 11%),
+    linear-gradient(135deg,#eaf5df,#fdf9e9 55%,#dcefd5);
   min-height:100vh;
-  font-family:Tahoma,Arial,sans-serif;
-  color:var(--text);
-  background:linear-gradient(
-    135deg,
-    #dcebd5,
-    #fff8e8,
-    #d7e8d4
-  );
 }
 
 .container{
-  max-width:850px;
+  max-width:980px;
   margin:auto;
-  padding:20px 14px 40px;
+  padding:22px;
 }
 
-/* =========================
-   หน้าเริ่มเกม
-========================= */
-
-.start-screen{
-  max-width:600px;
-  margin:35px auto;
-  background:#fffdf5;
-  border:3px solid #a9c59e;
-  border-radius:30px;
-  padding:30px 24px;
-  box-shadow:0 12px 35px #36543825;
-  text-align:center;
-}
-
-.start-icon{
-  font-size:70px;
-}
-
-.title,
-.game-title{
-  margin:0;
-  font-weight:900;
-  background:linear-gradient(
-    90deg,
-    #23613c,
-    #668c3c,
-    #9b683e
-  );
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-
-.title{
-  font-size:clamp(28px,7vw,42px);
-}
-
-.start-subtitle{
-  color:#58705b;
-  font-size:17px;
-  font-weight:bold;
-  margin:8px 0 12px;
-}
-
-/* เครดิตผู้พัฒนา */
-
-.developer{
-  margin:10px auto 24px;
-  padding:10px 14px;
-  max-width:520px;
-  background:linear-gradient(
-    135deg,
-    #edf5e7,
-    #fff8e8
-  );
-  border:1px solid var(--line);
-  border-radius:14px;
-  color:#49634f;
-  font-size:14px;
-  line-height:1.7;
-  font-weight:700;
-}
-
-.developer strong{
-  display:block;
-  color:var(--green);
-  font-size:16px;
-}
-
-/* ฟอร์ม */
-
-.form-group{
-  text-align:left;
-  margin-bottom:17px;
-}
-
-.form-group label{
-  display:block;
-  font-size:17px;
-  font-weight:900;
-  color:#315d40;
-  margin-bottom:7px;
-}
-
-.form-group input,
-.form-group select{
-  width:100%;
-  padding:14px 15px;
-  border:2px solid var(--line);
-  border-radius:14px;
-  background:#f9fcf5;
-  color:#294d3a;
-  font-size:17px;
-  font-weight:bold;
-  outline:none;
-}
-
-.form-group input:focus,
-.form-group select:focus{
-  border-color:#477a58;
-  box-shadow:0 0 0 4px #477a5820;
-}
-
-/* ปุ่มเริ่ม */
-
-.start-button,
-.next,
-.restart{
-  width:100%;
-  min-height:55px;
-  border:0;
-  border-radius:15px;
-  background:linear-gradient(
-    135deg,
-    #356f4b,
-    #6c964e
-  );
-  color:white;
-  font-size:18px;
-  font-weight:900;
-  cursor:pointer;
-  box-shadow:0 5px 0 #285239;
-}
-
-.start-button{
-  font-size:20px;
-}
-
-.error{
-  color:#b33c2d;
-  font-weight:bold;
-  min-height:24px;
-  margin-top:10px;
-}
-
-
-/* =========================
-   หน้าเกม
-========================= */
-
-#gameScreen{
-  display:none;
-}
-
-.header{
-  text-align:center;
-  background:#ffffffdd;
-  border:2px solid #a9c59e;
-  border-radius:28px;
-  padding:20px;
-  box-shadow:0 8px 25px #36543822;
-}
-
-.game-title{
-  font-size:clamp(27px,7vw,40px);
-}
-
-.player-info{
-  margin-top:8px;
-  color:#58705b;
-  font-weight:800;
-}
-
-.stats{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:15px;
-}
-
-.badge{
-  background:#f3f8ed;
-  border:2px solid var(--line);
-  padding:8px 18px;
-  border-radius:50px;
-  font-weight:900;
-  color:#315d40;
-}
-
-.game{
-  margin-top:16px;
-  background:var(--cream);
-  border:2px solid #d7c59f;
-  border-radius:26px;
-  padding:20px;
-  box-shadow:0 10px 30px #684d2b18;
-}
-
-/* แถบความคืบหน้า */
-
-.progress-bg{
-  height:12px;
-  background:#e2dbc9;
-  border-radius:20px;
+.card{
+  background:rgba(255,255,255,.94);
+  border:2px solid #b8d3ad;
+  border-radius:24px;
+  box-shadow:0 12px 35px rgba(45,82,48,.14);
   overflow:hidden;
-  margin-bottom:18px;
 }
 
-.progress{
-  height:100%;
-  width:10%;
-  background:linear-gradient(
-    90deg,
-    #3d754e,
-    #83a84f
-  );
-  transition:.4s;
-}
-
-/* สัญลักษณ์ */
-
-.symbol{
-  min-height:190px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(
-    145deg,
-    #f5f2e3,
-    #e5efdf
-  );
-  border:2px dashed #a5bd99;
-  border-radius:20px;
-}
-
-.symbol svg{
-  width:min(310px,90%);
-  height:170px;
-}
-
-/* คำถาม */
-
-.question{
+/* ส่วนหัว */
+.header{
+  padding:32px 24px;
   text-align:center;
-  font-size:22px;
-  font-weight:900;
-  color:#294f39;
-  margin:18px 5px;
+  color:white;
+  background:
+    linear-gradient(135deg,#245b36,#4f8a55 55%,#7cae62);
+  position:relative;
 }
 
-/* ตัวเลือก */
-
-.answers{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.answer{
-  min-height:62px;
-  border:2px solid #c7c9b9;
-  border-radius:15px;
-  background:#fff;
-  color:#304b39;
-  font-size:17px;
-  font-weight:800;
-  padding:10px 15px;
-  cursor:pointer;
-  text-align:left;
-  box-shadow:0 4px 0 #ddd7c6;
-  transition:.15s;
-}
-
-.answer:hover{
-  transform:translateY(-2px);
-}
-
-.answer.correct{
-  background:#dff1df;
-  border-color:#4d9660;
-  color:#236039;
-}
-
-.answer.wrong{
-  background:#fae0db;
-  border-color:#c45a4a;
-  color:#8b3025;
-}
-
-.answer:disabled{
-  cursor:default;
-}
-
-/* ผลลัพธ์ */
-
-.result{
-  text-align:center;
-  min-height:32px;
-  margin:16px 0 5px;
-  font-size:19px;
-  font-weight:900;
-}
-
-.restart{
-  margin-top:8px;
-}
-
-/* จำง่าย */
-
-.memory{
-  margin-top:18px;
-  padding:15px;
-  border-radius:18px;
-  background:#edf5e7;
-  border:1px solid #c0d3b4;
-}
-
-.memory-title{
-  font-weight:900;
-  color:#315d40;
+.header:before{
+  content:"🍃  🌿  🍀  🌱  🍃";
+  display:block;
+  font-size:28px;
+  letter-spacing:8px;
   margin-bottom:8px;
 }
 
-.memory span{
+h1{
+  margin:0;
+  font-size:clamp(25px,5vw,40px);
+}
+
+.subtitle{
+  margin:9px 0 0;
+  font-size:17px;
+}
+
+/* หน้าเริ่มต้น */
+.info{
+  padding:22px;
+  background:#f7f9ed;
+  border-bottom:1px solid #d5e4c9;
+}
+
+input[type=text]{
+  padding:12px 14px;
+  border:1px solid #aac69f;
+  border-radius:12px;
+  font-size:16px;
+  width:100%;
+  max-width:420px;
+}
+
+/* Progress */
+.progress-wrap{
+  padding:18px 24px 0;
+}
+
+.progress{
+  height:12px;
+  background:#e2eadb;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.bar{
+  height:100%;
+  width:0;
+  background:linear-gradient(
+    90deg,
+    #3e7c47,
+    #a0bf62
+  );
+  transition:.3s;
+}
+
+/* คำถาม */
+.question{
+  padding:24px;
+}
+
+.badge{
   display:inline-block;
-  margin:4px 8px 4px 0;
-  font-size:14px;
+  background:#e4f1df;
+  color:#2f6b3f;
+  padding:7px 13px;
+  border-radius:20px;
   font-weight:bold;
-  color:#435a48;
+}
+
+.qtext{
+  font-size:20px;
+  font-weight:bold;
+  line-height:1.65;
+  margin:15px 0;
+}
+
+/* ตัวเลือก */
+.option{
+  display:block;
+  padding:15px 17px;
+  margin:11px 0;
+  border:2px solid #d2e2ca;
+  border-radius:15px;
+  background:#fff;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.option:hover{
+  border-color:#6e9f67;
+  background:#f4faef;
+}
+
+.option input{
+  margin-right:10px;
+  transform:scale(1.2);
+}
+
+/* ปุ่ม */
+.actions{
+  display:flex;
+  gap:12px;
+  justify-content:space-between;
+  padding:0 24px 25px;
+}
+
+button{
+  border:0;
+  border-radius:14px;
+  padding:13px 22px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  background:#397447;
+  color:white;
+  box-shadow:0 5px 12px rgba(50,100,60,.18);
+}
+
+button.secondary{
+  background:#dfeadb;
+  color:#315c37;
+}
+
+button.gold{
+  background:#c99535;
+}
+
+button:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+/* หน้าผลคะแนน */
+.result{
+  display:none;
+  padding:35px 25px;
+  text-align:center;
+}
+
+.score{
+  font-size:56px;
+  font-weight:bold;
+  color:#2f6b3f;
+}
+
+.review{
+  text-align:left;
+  margin-top:22px;
+}
+
+.review-item{
+  padding:15px;
+  margin:10px 0;
+  border-radius:14px;
+}
+
+.correct{
+  background:#e9f6e6;
+  border-left:6px solid #4f9b50;
+}
+
+.wrong{
+  background:#fff0eb;
+  border-left:6px solid #c96a50;
+}
+
+.footer{
+  text-align:center;
+  color:#58705a;
+  font-size:13px;
+  padding:20px;
+}
+
+.hidden{
+  display:none;
 }
 
 /* มือถือ */
-
 @media(max-width:600px){
 
   .container{
-    padding:12px 10px 30px;
-  }
-
-  .start-screen{
-    margin:20px auto;
-    padding:25px 18px;
-  }
-
-  .game{
-    padding:14px;
-  }
-
-  .answers{
-    grid-template-columns:1fr;
+    padding:10px;
   }
 
   .question{
-    font-size:19px;
+    padding:18px;
   }
 
-  .answer{
-    font-size:16px;
+  .actions{
+    padding:0 18px 20px;
   }
+
+  .qtext{
+    font-size:18px;
+  }
+
 }
 </style>
 </head>
-
 
 <body>
 
 <div class="container">
 
-<!-- =================================
-     หน้าเข้าสู่เกม
-================================= -->
+<div class="card">
 
-<section
-  id="startScreen"
-  class="start-screen">
+<!-- HEADER -->
+<div class="header">
 
-  <div class="start-icon">
-    🌿🎮
-  </div>
+<h1>🌿 การป้องกันการทุจริต</h1>
 
-  <h1 class="title">
-    เกมนักสำรวจ Flowchart
-  </h1>
+<div class="subtitle">
+แบบทดสอบ ชั้นประถมศึกษาปีที่ 6
+• 20 ข้อ • 20 คะแนน
+</div>
 
-  <div class="start-subtitle">
-    เรียนรู้สัญลักษณ์ผังงานผ่านเกมแสนสนุก
-  </div>
+</div>
 
 
-  <!-- เครดิตผู้พัฒนา -->
+<!-- START SCREEN -->
+<div id="startScreen" class="info">
 
-  <div class="developer">
+<h2>🌱 ยินดีต้อนรับสู่แบบทดสอบ</h2>
 
-    <strong>
-      👨‍🏫 ผู้พัฒนาแอป โดย ครูปรเมศวร์ ฟองลม
-    </strong>
+<p>
+เลือกคำตอบที่ถูกต้องที่สุดเพียง 1 ข้อ
+แล้วกด “ข้อต่อไป”
+</p>
 
-    ครูโรงเรียนบ้านชาด
-    อำเภอศรีเมืองใหม่
-    สพป.อบ.3
+<label>
+<b>ชื่อ-สกุล</b>
+</label>
 
-  </div>
+<br><br>
 
+<input
+id="studentName"
+type="text"
+placeholder="พิมพ์ชื่อ-สกุล"
+>
 
-  <!-- ชื่อผู้เล่น -->
+<br><br>
 
-  <div class="form-group">
+<label>
+<b>ชั้น / ห้อง</b>
+</label>
 
-    <label for="playerName">
-      👤 ชื่อ - นามสกุล
-    </label>
+<br><br>
 
-    <input
-      id="playerName"
-      type="text"
-      placeholder="กรอกชื่อผู้เล่น"
-      autocomplete="name">
+<input
+id="studentClass"
+type="text"
+placeholder="เช่น ป.6/1"
+>
 
-  </div>
+<br><br>
 
+<button onclick="startQuiz()">
+เริ่มทำแบบทดสอบ 🌳
+</button>
 
-  <!-- ชั้นเรียน -->
+</div>
 
-  <div class="form-group">
 
-    <label for="classRoom">
-      🏫 ชั้นเรียน
-    </label>
+<!-- QUIZ SCREEN -->
+<div id="quizScreen" class="hidden">
 
-    <select id="classRoom">
+<div class="progress-wrap">
 
-      <option value="">
-        -- เลือกชั้นเรียน --
-      </option>
+<div id="progressText"></div>
 
-      <option>ป.1</option>
-      <option>ป.2</option>
-      <option>ป.3</option>
-      <option>ป.4</option>
-      <option>ป.5</option>
-      <option>ป.6</option>
+<br>
 
-      <option>ม.1</option>
-      <option>ม.2</option>
-      <option>ม.3</option>
+<div class="progress">
 
-      <option>ม.4</option>
-      <option>ม.5</option>
-      <option>ม.6</option>
+<div
+id="bar"
+class="bar">
+</div>
 
-    </select>
+</div>
 
-  </div>
+</div>
 
 
-  <div
-    id="error"
-    class="error">
-  </div>
+<div
+id="questionBox"
+class="question">
+</div>
 
 
-  <button
-    class="start-button"
-    id="startButton">
+<div class="actions">
 
-    🚀 ตกลง เริ่มเกม
+<button
+id="prevBtn"
+class="secondary"
+onclick="prevQuestion()">
 
-  </button>
+← ย้อนกลับ
 
-</section>
+</button>
 
 
-<!-- =================================
-     หน้าเกม
-================================= -->
+<button
+id="nextBtn"
+onclick="nextQuestion()">
 
-<section id="gameScreen">
+ข้อต่อไป →
 
-<header class="header">
+</button>
 
-  <h1 class="game-title">
-    🌿 เกมนักสำรวจ Flowchart
-  </h1>
+</div>
 
+</div>
 
-  <div class="player-info">
 
-    👤
-    <span id="displayName"></span>
+<!-- RESULT SCREEN -->
+<div
+id="resultScreen"
+class="result">
 
-    &nbsp; | &nbsp;
+<div style="font-size:50px">
+🌳🌿🍃
+</div>
 
-    🏫
-    <span id="displayClass"></span>
+<h2>
+ทำแบบทดสอบเสร็จแล้ว
+</h2>
 
-  </div>
+<p id="studentResult"></p>
 
+<div
+class="score"
+id="score">
+</div>
 
-  <div class="stats">
+<p id="message"></p>
 
-    <div class="badge">
+<div
+class="review"
+id="review">
+</div>
 
-      📗 ข้อ
+<button
+class="gold"
+onclick="location.reload()">
 
-      <span id="questionNumber">
-        1
-      </span>
+ทำแบบทดสอบอีกครั้ง
 
-      / 10
+</button>
 
-    </div>
+</div>
 
+</div>
 
-    <div class="badge">
 
-      ⭐ คะแนน
+<div class="footer">
 
-      <span id="score">
-        0
-      </span>
+🌱 เรียนรู้ความซื่อสัตย์
+• รู้เท่าทันการทุจริต
+• ร่วมสร้างสังคมโปร่งใส 🌱
 
-      / 10
-
-    </div>
-
-  </div>
-
-</header>
-
-
-<main class="game">
-
-
-  <!-- Progress -->
-
-  <div class="progress-bg">
-
-    <div
-      class="progress"
-      id="progress">
-    </div>
-
-  </div>
-
-
-  <!-- สัญลักษณ์ -->
-
-  <div
-    class="symbol"
-    id="symbol">
-  </div>
-
-
-  <!-- คำถาม -->
-
-  <div
-    class="question"
-    id="question">
-  </div>
-
-
-  <!-- ตัวเลือก -->
-
-  <div
-    class="answers"
-    id="answers">
-  </div>
-
-
-  <!-- ผลลัพธ์ -->
-
-  <div
-    class="result"
-    id="result">
-  </div>
-
-
-  <!-- ข้อถัดไป -->
-
-  <button
-    class="next"
-    id="nextButton"
-    hidden>
-
-    ข้อถัดไป ➜
-
-  </button>
-
-
-  <!-- เล่นใหม่ -->
-
-  <button
-    class="restart"
-    id="restartButton"
-    hidden>
-
-    🔄 เล่นอีกครั้ง
-
-  </button>
-
-
-  <!-- สรุปสัญลักษณ์ -->
-
-  <div class="memory">
-
-    <div class="memory-title">
-      🌱 จำง่าย 5 สัญลักษณ์สำคัญ
-    </div>
-
-    <span>
-      ⬭ วงรี = เริ่ม / จบ
-    </span>
-
-    <span>
-      ▭ สี่เหลี่ยม = กระบวนการ
-    </span>
-
-    <span>
-      ▱ ด้านขนาน = รับ / แสดงผล
-    </span>
-
-    <span>
-      ◇ ข้าวหลามตัด = เงื่อนไข
-    </span>
-
-    <span>
-      → ลูกศร = ทิศทาง
-    </span>
-
-  </div>
-
-</main>
-
-</section>
+</div>
 
 </div>
 
 
 <script>
 
-/* =================================
-   คำถาม 10 ข้อ
-================================= */
+/* =========================
+   ข้อสอบ 20 ข้อ
+========================= */
 
 const questions = [
 
-{
-  type:"ellipse",
+[
+"ข้อใดอธิบายความหมายของ “การทุจริต” ได้ถูกต้องที่สุด",
 
-  question:
-  "สัญลักษณ์นี้หมายถึงอะไร?",
+[
+"การทำงานผิดพลาดโดยไม่ได้ตั้งใจ",
+"การใช้ความรู้เพื่อช่วยเหลือผู้อื่น",
+"การแสวงหาประโยชน์โดยมิชอบให้แก่ตนเองหรือผู้อื่น",
+"การปฏิบัติตามกฎของโรงเรียน"
+],
 
-  answers:[
-    "เริ่มต้น / สิ้นสุด",
-    "รับข้อมูล / แสดงผล",
-    "ตรวจสอบเงื่อนไข",
-    "ประมวลผล"
-  ],
+2
+],
 
-  correct:0
-},
 
-{
-  type:"rectangle",
+[
+"นักเรียนพบว่าเพื่อนนำเงินของห้องไปซื้อขนมโดยไม่ได้รับอนุญาต นักเรียนควรทำอย่างไร",
 
-  question:
-  "สัญลักษณ์นี้ใช้แทนอะไร?",
+[
+"ไม่สนใจ เพราะไม่ใช่เรื่องของตน",
+"ช่วยเพื่อนปกปิดเรื่องดังกล่าว",
+"นำเรื่องไปพูดต่อในสื่อสังคมออนไลน์",
+"แจ้งครูหรือผู้รับผิดชอบด้วยข้อมูลตามความจริง"
+],
 
-  answers:[
-    "จุดเชื่อมต่อ",
-    "ประมวลผล / ขั้นตอนการทำงาน",
-    "เริ่มต้น / สิ้นสุด",
-    "ทิศทางการทำงาน"
-  ],
+3
+],
 
-  correct:1
-},
 
-{
-  type:"parallelogram",
+[
+"ข้อใดเป็นตัวอย่างของ “ผลประโยชน์ส่วนตน”",
 
-  question:
-  "สัญลักษณ์นี้ใช้สำหรับอะไร?",
+[
+"ช่วยกันรักษาความสะอาดห้องเรียน",
+"ใช้เงินส่วนรวมซื้อของที่ตนเองต้องการ",
+"แบ่งอุปกรณ์การเรียนให้เพื่อน",
+"ช่วยดูแลทรัพย์สินของโรงเรียน"
+],
 
-  answers:[
-    "รับข้อมูล / แสดงผล",
-    "ตรวจสอบเงื่อนไข",
-    "เริ่มต้น / สิ้นสุด",
-    "เชื่อมต่อผังงาน"
-  ],
+1
+],
 
-  correct:0
-},
 
-{
-  type:"diamond",
+[
+"โรงเรียนได้รับงบประมาณสำหรับซื้อหนังสือ นักเรียนเสนอให้ครูซื้อหนังสือจากร้านของญาติ แม้ราคาสูงกว่าร้านอื่น การกระทำนี้อาจเกี่ยวข้องกับเรื่องใดมากที่สุด",
 
-  question:
-  "รูปข้าวหลามตัดใช้แทนอะไร?",
+[
+"ความสามัคคี",
+"การมีน้ำใจ",
+"การขัดกันระหว่างผลประโยชน์ส่วนตนและส่วนรวม",
+"การประหยัดทรัพยากร"
+],
 
-  answers:[
-    "ประมวลผล",
-    "ตรวจสอบเงื่อนไข",
-    "รับข้อมูล",
-    "เริ่มต้น"
-  ],
+2
+],
 
-  correct:1
-},
 
-{
-  type:"arrow",
+[
+"หากนักเรียนได้รับเงินทอนจากร้านค้าเกินกว่าจำนวนที่ควรได้รับ สิ่งใดแสดงถึงความซื่อสัตย์สุจริตมากที่สุด",
 
-  question:
-  "ลูกศรใน Flowchart มีหน้าที่อะไร?",
+[
+"เก็บเงินไว้เพราะร้านค้าทอนผิดเอง",
+"แบ่งเงินให้เพื่อน",
+"นำเงินไปซื้อของให้ตนเอง",
+"แจ้งผู้ขายและคืนเงินส่วนที่เกิน"
+],
 
-  answers:[
-    "รับข้อมูล",
-    "แสดงทิศทางการทำงาน",
-    "ตรวจสอบเงื่อนไข",
-    "แสดงผลลัพธ์"
-  ],
+3
+],
 
-  correct:1
-},
 
-{
-  type:"circle",
+[
+"ข้อใดเป็นพฤติกรรมที่ช่วยสร้างวัฒนธรรม “ไม่ทนต่อการทุจริต”",
 
-  question:
-  "วงกลมเล็กในผังงานใช้ทำอะไร?",
+[
+"เห็นการโกงแล้วทำเป็นไม่รู้ไม่เห็น",
+"เตือนเพื่อนเมื่อพบพฤติกรรมที่ไม่ถูกต้อง และแจ้งผู้ใหญ่เมื่อจำเป็น",
+"ช่วยเพื่อนปกปิดความผิดเพื่อรักษามิตรภาพ",
+"แชร์เรื่องที่ยังไม่ตรวจสอบเพื่อให้คนอื่นรู้"
+],
 
-  answers:[
-    "เชื่อมต่อส่วนต่าง ๆ ของผังงาน",
-    "จบโปรแกรม",
-    "คำนวณตัวเลข",
-    "รับข้อมูล"
-  ],
+1
+],
 
-  correct:0
-},
 
-{
-  type:"diamond",
+[
+"นักเรียนได้รับข้อความว่า “คุณได้รับรางวัล เพียงกดลิงก์และกรอกข้อมูลส่วนตัวเพื่อรับเงินรางวัล” การกระทำใดเหมาะสมที่สุด",
 
-  question:
-  "ถ้าต้องการตรวจว่า คะแนน ≥ 50 หรือไม่ ควรใช้สัญลักษณ์ใด?",
+[
+"กดลิงก์ทันที",
+"ส่งข้อมูลให้เพื่อนช่วยตรวจสอบ",
+"ตรวจสอบแหล่งที่มาและไม่เปิดเผยข้อมูลสำคัญโดยไม่จำเป็น",
+"ส่งต่อข้อความให้ทุกคนในห้อง"
+],
 
-  answers:[
-    "วงรี",
-    "ข้าวหลามตัด",
-    "สี่เหลี่ยมผืนผ้า",
-    "ลูกศร"
-  ],
+2
+],
 
-  correct:1
-},
 
-{
-  type:"parallelogram",
+[
+"AI สามารถสร้างภาพหรือเสียงที่คล้ายบุคคลจริงได้ นักเรียนควรปฏิบัติอย่างไรเมื่อพบคลิปที่น่าสงสัย",
 
-  question:
-  "ถ้าต้องการ “รับชื่อจากผู้ใช้” ควรใช้สัญลักษณ์ใด?",
+[
+"เชื่อทันทีหากมีคนแชร์จำนวนมาก",
+"ตรวจสอบแหล่งที่มาและข้อมูลจากแหล่งที่น่าเชื่อถือก่อนเชื่อหรือส่งต่อ",
+"ส่งต่อให้เพื่อนเพื่อถามว่าเป็นเรื่องจริงหรือไม่",
+"เชื่อว่าภาพและเสียงทุกอย่างในอินเทอร์เน็ตเป็นของจริง"
+],
 
-  answers:[
-    "วงรี",
-    "สี่เหลี่ยมด้านขนาน",
-    "ข้าวหลามตัด",
-    "วงกลม"
-  ],
+1
+],
 
-  correct:1
-},
 
-{
-  type:"rectangle",
+[
+"ข้อใดเป็นการใช้ทรัพย์สินของโรงเรียนอย่างถูกต้อง",
 
-  question:
-  "ถ้าต้องการ “คำนวณ A + B” ควรใช้สัญลักษณ์ใด?",
+[
+"นำคอมพิวเตอร์โรงเรียนกลับไปใช้ที่บ้านโดยไม่ขออนุญาต",
+"ใช้เครื่องพิมพ์ของโรงเรียนพิมพ์งานส่วนตัวจำนวนมาก",
+"ใช้อุปกรณ์ตามวัตถุประสงค์และดูแลรักษาให้อยู่ในสภาพดี",
+"ยืมอุปกรณ์ของโรงเรียนให้บุคคลภายนอกโดยไม่แจ้งครู"
+],
 
-  answers:[
-    "สี่เหลี่ยมผืนผ้า",
-    "วงรี",
-    "ลูกศร",
-    "ข้าวหลามตัด"
-  ],
+2
+],
 
-  correct:0
-},
 
-{
-  type:"ellipse",
+[
+"หากเพื่อนขอให้นักเรียนลงชื่อแทน เพราะเพื่อนไม่มาโรงเรียน นักเรียนควรทำอย่างไร",
 
-  question:
-  "สัญลักษณ์ใดเหมาะกับข้อความ “จบการทำงาน”?",
+[
+"ลงชื่อแทนเพราะเป็นเพื่อนกัน",
+"ลงชื่อแทนถ้าไม่มีใครเห็น",
+"ปฏิเสธและอธิบายว่าการลงชื่อแทนเป็นการกระทำที่ไม่ถูกต้อง",
+"ให้เพื่อนคนอื่นลงชื่อแทน"
+],
 
-  answers:[
-    "สี่เหลี่ยมด้านขนาน",
-    "ข้าวหลามตัด",
-    "วงรี",
-    "สี่เหลี่ยมผืนผ้า"
-  ],
+2
+],
 
-  correct:2
-}
+
+[
+"ข้อใดแสดงถึงความรับผิดชอบต่อ “ประโยชน์ส่วนรวม”",
+
+[
+"เก็บของส่วนกลางไว้ใช้คนเดียว",
+"ใช้น้ำและไฟของโรงเรียนอย่างประหยัด",
+"นำอุปกรณ์ของห้องเรียนไปใช้ส่วนตัว",
+"เลือกทำเฉพาะสิ่งที่ตนเองได้รับประโยชน์"
+],
+
+1
+],
+
+
+[
+"หากพบว่าการเลือกตั้งประธานนักเรียนมีผู้สมัครคนหนึ่งแจกของเพื่อแลกกับคะแนนเสียง นักเรียนควรทำอย่างไร",
+
+[
+"รับของแล้วลงคะแนนให้",
+"รับของแต่ไม่ลงคะแนนให้",
+"แจ้งครูหรือคณะกรรมการเลือกตั้งตามข้อเท็จจริง",
+"ชวนเพื่อนให้รับของด้วย"
+],
+
+2
+],
+
+
+[
+"ข้อใดเป็นการแสดงความ “ละอายและไม่ทนต่อการทุจริต”",
+
+[
+"เห็นเพื่อนโกงข้อสอบแล้วช่วยบังไม่ให้ครูเห็น",
+"ไม่ลอกข้อสอบและเตือนเพื่อนให้ทำข้อสอบด้วยตนเอง",
+"ส่งคำตอบให้เพื่อนเพราะสงสาร",
+"ลอกคำตอบจากเพื่อนเพราะทุกคนทำกัน"
+],
+
+1
+],
+
+
+[
+"พบข้อมูลออนไลน์กล่าวหาว่าโรงเรียนทุจริต แต่ไม่มีแหล่งที่มาชัดเจน ควรทำอย่างไร",
+
+[
+"แชร์ทันทีเพื่อให้คนอื่นรับรู้",
+"ตรวจสอบข้อมูลและแหล่งที่มาก่อนเชื่อหรือเผยแพร่",
+"เพิ่มข้อความกล่าวหาให้รุนแรงขึ้น",
+"ส่งต่อในกลุ่มห้องเรียนโดยไม่ตรวจสอบ"
+],
+
+1
+],
+
+
+[
+"ข้อใดเป็นตัวอย่างของ “ความโปร่งใส”",
+
+[
+"ปิดบังข้อมูลการใช้เงินของส่วนรวม",
+"เปิดเผยข้อมูลที่ควรเปิดเผยและสามารถตรวจสอบได้",
+"ให้เฉพาะเพื่อนสนิททราบข้อมูล",
+"เปลี่ยนข้อมูลเพื่อให้ตนเองดูดี"
+],
+
+1
+],
+
+
+[
+"คณะกรรมการห้องได้รับเงินเพื่อจัดกิจกรรม และมีเงินเหลือหลังจัดกิจกรรมแล้ว สิ่งใดควรทำมากที่สุด",
+
+[
+"แบ่งเงินที่เหลือกันเอง",
+"นำเงินไปซื้อของส่วนตัว",
+"รายงานยอดเงินและดำเนินการตามระเบียบหรือข้อตกลงของห้องเรียน",
+"เก็บเงินไว้โดยไม่แจ้งใคร"
+],
+
+2
+],
+
+
+[
+"ข้อใดเป็นวิธีลดโอกาสการถูกหลอกลวงทางออนไลน์",
+
+[
+"เชื่อข้อความที่เร่งให้รีบโอนเงิน",
+"เปิดเผยรหัสผ่านเพื่อยืนยันตัวตน",
+"ไม่รีบเชื่อ ตรวจสอบข้อมูล และไม่โอนเงินเพียงเพราะถูกเร่งรัด",
+"กดลิงก์จากข้อความที่ไม่รู้จักเพื่อดูรายละเอียด"
+],
+
+2
+],
+
+
+[
+"พบกระเป๋าสตางค์ตกอยู่ในสนามโรงเรียน ไม่มีใครอยู่บริเวณนั้น การกระทำใดเหมาะสมที่สุด",
+
+[
+"เก็บเงินไว้แล้วทิ้งกระเป๋า",
+"แบ่งเงินกับเพื่อน",
+"นำส่งครูหรือฝ่ายที่รับผิดชอบเพื่อตามหาเจ้าของ",
+"เก็บไว้ก่อนแล้วค่อยตัดสินใจภายหลัง"
+],
+
+2
+],
+
+
+[
+"เหตุใดการมี “จิตสาธารณะ” จึงช่วยป้องกันการทุจริตได้",
+
+[
+"ทำให้เราได้รับสิ่งของมากขึ้น",
+"ทำให้คำนึงถึงประโยชน์ของส่วนรวมและไม่เอาเปรียบผู้อื่น",
+"ทำให้สามารถทำสิ่งใดก็ได้โดยไม่ต้องมีกฎ",
+"ทำให้ได้รับสิทธิพิเศษจากโรงเรียน"
+],
+
+1
+],
+
+
+[
+"หากต้องการเป็นส่วนหนึ่งในการป้องกันการทุจริตในโรงเรียน ข้อใดเหมาะสมที่สุด",
+
+[
+"ปฏิบัติตามกฎ มีความซื่อสัตย์ ใช้ทรัพย์สินส่วนรวมอย่างรับผิดชอบ และกล้าแจ้งเมื่อพบสิ่งผิดปกติ",
+"สนใจเฉพาะเรื่องที่เกี่ยวข้องกับตนเอง",
+"ปล่อยให้ครูเป็นผู้แก้ปัญหาเพียงฝ่ายเดียว",
+"ไม่พูดถึงการทุจริตเพราะกลัวเกิดปัญหา"
+],
+
+0
+]
 
 ];
 
 
-let currentQuestion = 0;
-let score = 0;
-let answered = false;
+/* =========================
+   ตัวแปร
+========================= */
 
+let current = 0;
 
-/* =================================
-   ฟังก์ชันย่อ
-================================= */
+let answers =
+Array(questions.length).fill(null);
 
-const $ = id =>
-  document.getElementById(id);
 
+/* =========================
+   เริ่มทำข้อสอบ
+========================= */
 
-/* =================================
-   เริ่มเกม
-================================= */
+function startQuiz(){
 
-$("startButton").onclick = function(){
+  document
+  .getElementById("startScreen")
+  .classList.add("hidden");
 
-  const name =
-    $("playerName").value.trim();
+  document
+  .getElementById("quizScreen")
+  .classList.remove("hidden");
 
-  const classroom =
-    $("classRoom").value;
+  render();
 
+}
 
-  if(name === ""){
 
-    $("error").textContent =
-      "⚠️ กรุณากรอกชื่อผู้เล่น";
+/* =========================
+   แสดงคำถาม
+========================= */
 
-    return;
-  }
+function render(){
 
+  const q = questions[current];
 
-  if(classroom === ""){
+  document
+  .getElementById("progressText")
+  .textContent =
+  `ข้อ ${current + 1} / ${questions.length}`;
 
-    $("error").textContent =
-      "⚠️ กรุณาเลือกชั้นเรียน";
 
-    return;
-  }
+  document
+  .getElementById("bar")
+  .style.width =
+  ((current + 1) /
+  questions.length * 100) + "%";
 
 
-  $("displayName").textContent =
-    name;
+  let html = `
 
-  $("displayClass").textContent =
-    classroom;
+  <span class="badge">
+  🌿 คำถามที่ ${current + 1}
+  </span>
 
-
-  $("startScreen").style.display =
-    "none";
-
-  $("gameScreen").style.display =
-    "block";
-
-
-  currentQuestion = 0;
-  score = 0;
-
-
-  showQuestion();
-
-};
-
-
-/* กด Enter ในช่องชื่อ */
-
-$("playerName").addEventListener(
-  "keydown",
-  function(event){
-
-    if(event.key === "Enter"){
-
-      $("startButton").click();
-
-    }
-
-  }
-);
-
-
-/* =================================
-   วาดสัญลักษณ์
-================================= */
-
-function drawSymbol(type){
-
-  if(type === "ellipse"){
-
-    return `
-
-    <svg viewBox="0 0 320 180">
-
-      <ellipse
-        cx="160"
-        cy="90"
-        rx="120"
-        ry="55"
-        fill="#fffdf5"
-        stroke="#477a58"
-        stroke-width="6"/>
-
-      <text
-        x="160"
-        y="98"
-        text-anchor="middle"
-        font-size="23"
-        font-weight="bold"
-        fill="#294d3a">
-
-        เริ่ม / จบ
-
-      </text>
-
-    </svg>
-
-    `;
-
-  }
-
-
-  if(type === "rectangle"){
-
-    return `
-
-    <svg viewBox="0 0 320 180">
-
-      <rect
-        x="50"
-        y="35"
-        width="220"
-        height="110"
-        fill="#fffdf5"
-        stroke="#477a58"
-        stroke-width="6"/>
-
-      <text
-        x="160"
-        y="100"
-        text-anchor="middle"
-        font-size="24"
-        font-weight="bold"
-        fill="#294d3a">
-
-        Process
-
-      </text>
-
-    </svg>
-
-    `;
-
-  }
-
-
-  if(type === "parallelogram"){
-
-    return `
-
-    <svg viewBox="0 0 320 180">
-
-      <polygon
-        points="75,35 285,35 245,145 35,145"
-        fill="#fffdf5"
-        stroke="#477a58"
-        stroke-width="6"/>
-
-      <text
-        x="160"
-        y="101"
-        text-anchor="middle"
-        font-size="21"
-        font-weight="bold"
-        fill="#294d3a">
-
-        Input / Output
-
-      </text>
-
-    </svg>
-
-    `;
-
-  }
-
-
-  if(type === "diamond"){
-
-    return `
-
-    <svg viewBox="0 0 320 180">
-
-      <polygon
-        points="160,15 290,90 160,165 30,90"
-        fill="#fffdf5"
-        stroke="#477a58"
-        stroke-width="6"/>
-
-      <text
-        x="160"
-        y="98"
-        text-anchor="middle"
-        font-size="23"
-        font-weight="bold"
-        fill="#294d3a">
-
-        เงื่อนไข?
-
-      </text>
-
-    </svg>
-
-    `;
-
-  }
-
-
-  if(type === "arrow"){
-
-    return `
-
-    <svg viewBox="0 0 320 180">
-
-      <line
-        x1="35"
-        y1="90"
-        x2="255"
-        y2="90"
-        stroke="#477a58"
-        stroke-width="9"/>
-
-      <polygon
-        points="285,90 245,62 245,118"
-        fill="#477a58"/>
-
-    </svg>
-
-    `;
-
-  }
-
-
-  return `
-
-  <svg viewBox="0 0 320 180">
-
-    <circle
-      cx="160"
-      cy="90"
-      r="52"
-      fill="#fffdf5"
-      stroke="#477a58"
-      stroke-width="6"/>
-
-    <text
-      x="160"
-      y="100"
-      text-anchor="middle"
-      font-size="28"
-      font-weight="bold"
-      fill="#294d3a">
-
-      A
-
-    </text>
-
-  </svg>
+  <div class="qtext">
+  ${q[0]}
+  </div>
 
   `;
 
-}
+
+  q[1].forEach((op,i)=>{
+
+    html += `
+
+    <label class="option">
+
+    <input
+    type="radio"
+    name="answer"
+    value="${i}"
+
+    ${answers[current] === i
+    ? "checked"
+    : ""}
+
+    onchange="answers[current]=${i}">
+
+    ${String.fromCharCode(65+i)}.
+    ${op}
+
+    </label>
+
+    `;
+
+  });
 
 
-/* =================================
-   แสดงคำถาม
-================================= */
-
-function showQuestion(){
-
-  answered = false;
+  document
+  .getElementById("questionBox")
+  .innerHTML = html;
 
 
-  const q =
-    questions[currentQuestion];
+  document
+  .getElementById("prevBtn")
+  .disabled = current === 0;
 
 
-  $("questionNumber").textContent =
-    currentQuestion + 1;
-
-
-  $("score").textContent =
-    score;
-
-
-  $("progress").style.width =
-    ((currentQuestion + 1) / 10 * 100)
-    + "%";
-
-
-  $("symbol").innerHTML =
-    drawSymbol(q.type);
-
-
-  $("question").textContent =
-    q.question;
-
-
-  $("result").textContent =
-    "";
-
-
-  $("nextButton").hidden =
-    true;
-
-
-  $("restartButton").hidden =
-    true;
-
-
-  const box =
-    $("answers");
-
-
-  box.innerHTML =
-    "";
-
-
-  q.answers.forEach(
-    function(answer,index){
-
-      const button =
-        document.createElement("button");
-
-
-      button.className =
-        "answer";
-
-
-      button.type =
-        "button";
-
-
-      button.textContent =
-        answer;
-
-
-      button.onclick =
-        function(){
-
-          checkAnswer(
-            index,
-            button
-          );
-
-        };
-
-
-      box.appendChild(button);
-
-    }
-  );
+  document
+  .getElementById("nextBtn")
+  .textContent =
+  current === questions.length - 1
+  ? "ส่งคำตอบ ✓"
+  : "ข้อต่อไป →";
 
 }
 
 
-/* =================================
-   ตรวจคำตอบ
-================================= */
+/* =========================
+   ข้อต่อไป
+========================= */
 
-function checkAnswer(index,button){
+function nextQuestion(){
 
-  if(answered)
+  if(answers[current] === null){
+
+    alert(
+      "กรุณาเลือกคำตอบก่อนดำเนินการต่อ"
+    );
+
     return;
 
-
-  answered = true;
-
-
-  const q =
-    questions[currentQuestion];
-
-
-  const buttons =
-    document.querySelectorAll(
-      ".answer"
-    );
-
-
-  buttons.forEach(
-    b => b.disabled = true
-  );
-
-
-  if(index === q.correct){
-
-    score++;
-
-
-    button.classList.add(
-      "correct"
-    );
-
-
-    $("result").textContent =
-      "🎉 ถูกต้อง! +1 คะแนน";
-
-  }
-
-  else{
-
-    button.classList.add(
-      "wrong"
-    );
-
-
-    buttons[q.correct]
-      .classList.add(
-        "correct"
-      );
-
-
-    $("result").textContent =
-      "🌱 ยังไม่ถูก คำตอบคือ “"
-      + q.answers[q.correct]
-      + "”";
-
   }
 
 
-  $("score").textContent =
-    score;
+  if(current < questions.length - 1){
 
+    current++;
 
-  $("nextButton").hidden =
-    false;
+    render();
+
+  }else{
+
+    finish();
+
+  }
 
 }
 
 
-/* =================================
-   ข้อถัดไป
-================================= */
+/* =========================
+   ย้อนกลับ
+========================= */
 
-$("nextButton").onclick =
-function(){
+function prevQuestion(){
 
-  if(currentQuestion < 9){
+  if(current > 0){
 
-    currentQuestion++;
+    current--;
 
-    showQuestion();
+    render();
+
+  }
+
+}
+
+
+/* =========================
+   ตรวจคำตอบ
+========================= */
+
+function finish(){
+
+  let score = 0;
+
+
+  questions.forEach((q,i)=>{
+
+    if(answers[i] === q[2]){
+
+      score++;
+
+    }
+
+  });
+
+
+  document
+  .getElementById("quizScreen")
+  .classList.add("hidden");
+
+
+  document
+  .getElementById("resultScreen")
+  .style.display = "block";
+
+
+  const name =
+  document
+  .getElementById("studentName")
+  .value || "นักเรียน";
+
+
+  const cls =
+  document
+  .getElementById("studentClass")
+  .value || "-";
+
+
+  document
+  .getElementById("studentResult")
+  .textContent =
+  `${name} • ${cls}`;
+
+
+  document
+  .getElementById("score")
+  .textContent =
+  `${score} / ${questions.length} คะแนน`;
+
+
+  let message;
+
+
+  if(score >= 18){
+
+    message =
+    "🌟 ยอดเยี่ยมมาก! มีความเข้าใจเรื่องความซื่อสัตย์และการป้องกันการทุจริตดีมาก";
+
+  }
+
+  else if(score >= 14){
+
+    message =
+    "🌱 ทำได้ดี! ลองทบทวนข้อที่ผิดเพื่อพัฒนาความรู้ให้ดียิ่งขึ้น";
 
   }
 
   else{
 
-    $("symbol").innerHTML =
-      "🎉";
-
-
-    $("question").textContent =
-      "จบเกมแล้ว!";
-
-
-    $("answers").innerHTML =
-      "";
-
-
-    $("result").textContent =
-      "🌟 "
-      + $("displayName").textContent
-      + " ได้คะแนน "
-      + score
-      + " / 10 คะแนน";
-
-
-    $("nextButton").hidden =
-      true;
-
-
-    $("restartButton").hidden =
-      false;
+    message =
+    "🍃 ควรทบทวนเรื่องความซื่อสัตย์ ผลประโยชน์ส่วนตนและส่วนรวม และการรู้เท่าทันสื่อเพิ่มเติม";
 
   }
 
-};
+
+  document
+  .getElementById("message")
+  .textContent = message;
 
 
-/* =================================
-   เล่นอีกครั้ง
-================================= */
+  /* แสดงเฉลย */
 
-$("restartButton").onclick =
-function(){
+  let review = "";
 
-  currentQuestion = 0;
 
-  score = 0;
+  questions.forEach((q,i)=>{
 
-  showQuestion();
+    const ok =
+    answers[i] === q[2];
 
-};
+
+    review += `
+
+    <div class="review-item
+    ${ok ? "correct" : "wrong"}">
+
+    <b>
+    ข้อ ${i+1}:
+    ${ok ? "✓ ถูก" : "✗ ผิด"}
+    </b>
+
+    <br>
+
+    คำตอบที่ถูก:
+    ${String.fromCharCode(65 + q[2])}.
+    ${q[1][q[2]]}
+
+    </div>
+
+    `;
+
+  });
+
+
+  document
+  .getElementById("review")
+  .innerHTML = review;
+
+}
 
 </script>
 
